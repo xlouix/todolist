@@ -46,30 +46,73 @@ function renderTasks(filterCategory = '') {
     const checkedAttr = task.concluida ? 'checked' : '';
     const textStyle = task.concluida ? 'text-decoration-line-through text-muted' : '';
 
-    li.innerHTML = `
-      <div class="card shadow-sm border-0" style="transition: box-shadow 0.2s; border-radius: 1rem;">
-        <div class="card-body p-4" style="background: #f8f9fa; border-radius: 1rem; position: relative;">
-          <div class="d-flex align-items-center mb-3">
-            <input class="form-check-input me-3" type="checkbox" id="check-${index}" onchange="toggleComplete(${index})" ${checkedAttr} style="transform: scale(1.3);">
-            <span class="fw-semibold fs-5 ${textStyle}">${task.titulo}</span>
-          </div>
-          <div class="d-flex justify-content-end align-items-center mb-2" style="gap: 0.3rem;">
-            <span class="badge bg-secondary px-2 py-1" style="font-size: 0.80em;">${task.categoria}</span>
-            <span class="badge ${task.prioridade === 'Alta' ? 'bg-danger' : task.prioridade === 'Média' ? 'bg-warning text-dark' : 'bg-success'} px-2 py-1" style="font-size: 0.80em;">
-              ${task.prioridade}
-            </span>
-            ${isAtrasada ? '<span class="badge bg-danger ms-2 px-2 py-1" style="font-size: 0.80em;">Atrasada</span>' : ''}
-          </div>
-          <div class="d-flex align-items-center mt-3" style="min-height:2.2rem;">
-            <small class="text-muted">${task.data ? task.data : ''}</small>
-            <div style="flex:1"></div>
-            <button onclick="deleteTask(${index})" class="btn btn-sm btn-outline-danger px-2 py-1 ms-3" style="border-radius: 0.7rem; font-size:0.75em;">
-              <i class="bi bi-trash"></i> Excluir
-            </button>
+    // Verifica se está em modo de edição
+    if (task.editing) {
+      // Cria select de categorias
+      let categoryOptions = categories.map(cat =>
+        `<option value="${cat}" ${cat === task.categoria ? 'selected' : ''}>${cat}</option>`
+      ).join('');
+      // Cria select de prioridade
+      let priorityOptions = ['Baixa', 'Média', 'Alta'].map(prio =>
+        `<option value="${prio}" ${prio === task.prioridade ? 'selected' : ''}>${prio}</option>`
+      ).join('');
+
+      li.innerHTML = `
+        <div class="card shadow-sm border-0" style="transition: box-shadow 0.2s; border-radius: 1rem;">
+          <div class="card-body p-4" style="background: #f8f9fa; border-radius: 1rem; position: relative;">
+            <div class="d-flex align-items-center mb-3">
+              <input class="form-check-input me-3" type="checkbox" id="check-${index}" onchange="toggleComplete(${index})" ${checkedAttr} style="transform: scale(1.3);" disabled>
+              <span class="fw-semibold fs-5 ${textStyle}">${task.titulo}</span>
+            </div>
+            <div class="d-flex justify-content-end align-items-center mb-2" style="gap: 0.3rem;">
+              <select id="edit-category-${index}" class="form-select form-select-sm" style="width:auto;display:inline-block;">${categoryOptions}</select>
+              <select id="edit-priority-${index}" class="form-select form-select-sm ms-2" style="width:auto;display:inline-block;">
+                ${priorityOptions}
+              </select>
+              ${isAtrasada ? '<span class="badge bg-danger ms-2 px-2 py-1" style="font-size: 0.80em;">Atrasada</span>' : ''}
+            </div>
+            <div class="d-flex align-items-center mt-3" style="min-height:2.2rem;">
+              <small class="text-muted">${task.data ? task.data : ''}</small>
+              <div style="flex:1"></div>
+              <button onclick="saveEditTask(${index})" class="btn btn-sm btn-success px-2 py-1 ms-2" style="border-radius: 0.7rem; font-size:0.75em;">
+                <i class="bi bi-check2"></i> Salvar
+              </button>
+              <button onclick="cancelEditTask(${index})" class="btn btn-sm btn-secondary px-2 py-1 ms-2" style="border-radius: 0.7rem; font-size:0.75em;">
+                <i class="bi bi-x"></i> Cancelar
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      li.innerHTML = `
+        <div class="card shadow-sm border-0" style="transition: box-shadow 0.2s; border-radius: 1rem;">
+          <div class="card-body p-4" style="background: #f8f9fa; border-radius: 1rem; position: relative;">
+            <div class="d-flex align-items-center mb-3">
+              <input class="form-check-input me-3" type="checkbox" id="check-${index}" onchange="toggleComplete(${index})" ${checkedAttr} style="transform: scale(1.3);">
+              <span class="fw-semibold fs-5 ${textStyle}">${task.titulo}</span>
+            </div>
+            <div class="d-flex justify-content-end align-items-center mb-2" style="gap: 0.3rem;">
+              <span class="badge bg-secondary px-2 py-1" style="font-size: 0.80em;">${task.categoria}</span>
+              <span class="badge ${task.prioridade === 'Alta' ? 'bg-danger' : task.prioridade === 'Média' ? 'bg-warning text-dark' : 'bg-success'} px-2 py-1" style="font-size: 0.80em;">
+                ${task.prioridade}
+              </span>
+              ${isAtrasada ? '<span class="badge bg-danger ms-2 px-2 py-1" style="font-size: 0.80em;">Atrasada</span>' : ''}
+            </div>
+            <div class="d-flex align-items-center mt-3" style="min-height:2.2rem;">
+              <small class="text-muted">${task.data ? task.data : ''}</small>
+              <div style="flex:1"></div>
+              <button onclick="editTask(${index})" class="btn btn-sm btn-outline-primary px-2 py-1 ms-2" style="border-radius: 0.7rem; font-size:0.75em;">
+                <i class="bi bi-pencil"></i> Editar
+              </button>
+              <button onclick="deleteTask(${index})" class="btn btn-sm btn-outline-danger px-2 py-1 ms-2" style="border-radius: 0.7rem; font-size:0.75em;">
+                <i class="bi bi-trash"></i> Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     // Efeito hover moderno
     li.querySelector('.card').addEventListener('mouseenter', function() {
@@ -83,17 +126,28 @@ function renderTasks(filterCategory = '') {
   });
 }
 
-function deleteTask(index) {
-  tasks.splice(index, 1);
-  saveTasks();
+// Funções de edição
+window.editTask = function(index) {
+  tasks[index].editing = true;
   renderTasks();
-}
+};
 
-function toggleComplete(index) {
-  tasks[index].concluida = !tasks[index].concluida;
+window.saveEditTask = function(index) {
+  const catSel = document.getElementById(`edit-category-${index}`);
+  const prioSel = document.getElementById(`edit-priority-${index}`);
+  if (catSel && prioSel) {
+    tasks[index].categoria = catSel.value;
+    tasks[index].prioridade = prioSel.value;
+  }
+  delete tasks[index].editing;
   saveTasks();
   renderTasks();
-}
+};
+
+window.cancelEditTask = function(index) {
+  delete tasks[index].editing;
+  renderTasks();
+};
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
