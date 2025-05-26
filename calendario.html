@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendário de Tarefas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="text-end mb-3">
+      <a href="index.html" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
+    </div>
+    <h1 class="text-center mb-4"><i class="bi bi-calendar3"></i> Calendário de Tarefas</h1>
+    <div id="calendar"></div>
+  </div>
+
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendar');
+
+      const tarefas = JSON.parse(localStorage.getItem('tasks')) || [];
+
+      const eventos = tarefas
+        .filter(t => t.data)
+        .map(tarefa => ({
+          title: tarefa.titulo,
+          start: tarefa.data,
+          color: tarefa.prioridade === 'Alta' ? '#dc3545' :
+                 tarefa.prioridade === 'Média' ? '#facc15' :
+                 '#22c55e'
+        }));
+
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'pt-br',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek'
+        },
+        events: eventos
+      });
+
+      calendar.render();
+    });
+  </script>
+</body>
+</html>

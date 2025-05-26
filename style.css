@@ -1,0 +1,341 @@
+body {
+    background: linear-gradient(120deg, #e0e7ff 0%, #f4f7fa 100%);
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 700px;
+    margin: 48px auto;
+    padding: 36px 28px;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 8px 36px rgba(37, 99, 235, 0.13);
+}
+
+h1 {
+    text-align: center;
+    color: #2563eb;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.7rem;
+    font-size: 2.7rem;
+}
+
+.todo-header p {
+    font-size: 1.18rem;
+    color: #64748b;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.card-form {
+    background: #f1f5f9;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.08);
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+    border: none;
+}
+
+.form-label {
+    font-weight: 700;
+    color: #2563eb;
+    letter-spacing: 0.5px;
+}
+
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1.5px solid #cbd5e1;
+    background: #f8fafc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 1.05rem;
+    padding: 0.7rem 1rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 8px #2563eb33;
+    background: #fff;
+}
+
+.btn, .category-btn {
+    border-radius: 10px;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    font-size: 1.05rem;
+}
+
+.btn-primary, .btn-primary:focus {
+    background: linear-gradient(90deg, #2563eb 60%, #60a5fa 100%);
+    border: none;
+    color: #fff;
+    box-shadow: 0 2px 10px #2563eb22;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #1d4ed8 60%, #3b82f6 100%);
+}
+
+.btn-outline-primary {
+    border-color: #2563eb;
+    color: #2563eb;
+    background: #fff;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background: #2563eb;
+    color: #fff;
+}
+
+.category-btn {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    min-width: 120px;
+    font-size: 1rem;
+    box-shadow: 0 1px 4px #2563eb11;
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+    background: #fff;
+}
+
+.btn-outline-danger:hover, .btn-outline-danger:focus {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.card {
+    border: none;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.09);
+    transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.card:hover {
+    transform: scale(1.025);
+    box-shadow: 0 6px 24px rgba(37, 99, 235, 0.15);
+}
+
+.task {
+    background: transparent;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: none;
+}
+
+.atrasada .card {
+    border: 2px solid #dc3545;
+    background-color: #f8d7da;
+}
+
+.atrasada .card .card-body {
+    color: #721c24;
+}
+
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.card-text .badge.bg-secondary {
+    font-size: 0.85em;
+    padding: 3px 10px;
+}
+
+.card-body.d-flex {
+    gap: 1rem;
+}
+
+.ms-2.flex-grow-1 {
+    margin-left: 0.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-text.mb-1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem !important;
+}
+
+.card-text.mb-1 .badge.bg-secondary {
+    margin-right: 0.3rem;
+}
+
+.card-body .badge:not(.bg-secondary) {
+    margin-left: 0.3rem;
+}
+
+.btn-outline-danger.ms-2 {
+    margin-left: auto !important;
+}
+
+.badge {
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.78em;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    box-shadow: 0 1px 4px #2563eb11;
+}
+
+.bg-secondary {
+    background: #64748b !important;
+}
+
+.bg-success {
+    background: #22c55e !important;
+}
+
+.bg-warning {
+    background: #facc15 !important;
+    color: #92400e !important;
+}
+
+.bg-danger {
+    background: #dc3545 !important;
+}
+
+.text-muted {
+    color: #94a3b8 !important;
+}
+
+.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+.ms-2 {
+    margin-left: 0.5rem;
+}
+
+input[type="checkbox"].form-check-input {
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 6px;
+    border: 2px solid #2563eb;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+input[type="checkbox"].form-check-input:checked {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background: #e0e7ff;
+}
+::-webkit-scrollbar-thumb {
+    background: #c7d2fe;
+    border-radius: 8px;
+}
+
+/* Novos detalhes para responsividade e visual */
+@media (max-width: 600px) {
+    .container {
+        padding: 12px 2vw;
+        max-width: 98vw;
+    }
+    .card-form {
+        padding: 1rem 0.5rem;
+    }
+    .card-body {
+        padding: 1.2rem !important;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Centralização vertical e responsiva para login e registro */
+.login-container, .register-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 32px 28px 24px 28px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 32px rgba(37, 99, 235, 0.10);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 420px;
+    min-height: 60vh;
+    position: relative;
+    top: 50%;
+    transform: translateY(15%);
+}
+
+@media (max-width: 600px) {
+    .login-container, .register-container {
+        max-width: 98vw;
+        padding: 18px 4vw 18px 4vw;
+        min-height: 60vh;
+    }
+}
+
+.card-body .d-flex.justify-content-between {
+    width: 100%;
+}
+
+.card-body .btn-outline-danger {
+    margin-left: 0;
+    order: 1;
+}
+
+.card-body .d-flex.flex-wrap {
+    gap: 0.5rem;
+}
+
+.card-body .badge {
+    margin-right: 0;
+}
+
+.card-body .text-muted {
+    margin-right: 0.3rem;
+}
+
+/* Alinhamento vertical dos campos de formulário em login e registro */
+.login-container form,
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.login-container .form-group,
+.register-container .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.login-container .form-label,
+.register-container .form-label {
+    margin-bottom: 0.4rem;
+    text-align: left;
+}
+
+.login-container .form-control,
+.register-container .form-control {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Suave animação de entrada para tasks */
+@keyframes fadeInTask {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+#task-list > li {
+    animation: fadeInTask 0.5s;
+}
