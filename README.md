@@ -14,3 +14,17 @@ Um simples aplicativo de gerenciamento de tarefas que permite aos usuários se r
 - HTML
 - CSS (Bootstrap)
 - JavaScript
+
+## Como Usar
+
+1. **Clone o Repositório**:
+   ```bash
+   git clone https://github.com/xlouix/todolist/
+   cd todolist
+Abra os Arquivos HTML:
+Abra index.html em seu navegador.
+
+Após o login, você será redirecionado para a tela de gerenciamento de tarefas. (A funcionalidade de gerenciamento de tarefas pode ser adicionada conforme necessário.)
+Logout:
+
+Clique no botão "Logout" na tela de gerenciamento de tarefas para sair.
